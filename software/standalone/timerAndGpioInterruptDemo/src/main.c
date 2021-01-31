@@ -53,14 +53,14 @@ void init(){
 uint64_t timerCmp; //Store the next interrupt time
 
 void initTimer(){
-    timerCmp = clint_getTime(BSP_CLINT);
+    timerCmp = bsp_getTime();
     scheduleTimer();
 }
 
 //Make the timer tick in 1 second. (if SPINAL_SIM=yes, then much faster for simulations reasons)
 void scheduleTimer(){
     timerCmp += TIMER_TICK_DELAY;
-    clint_setCmp(BSP_CLINT, timerCmp, 0);
+    bsp_setCmp(timerCmp);
 }
 
 //Called by trap_entry on both exceptions and interrupts events

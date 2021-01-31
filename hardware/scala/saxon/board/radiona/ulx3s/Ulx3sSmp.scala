@@ -393,7 +393,7 @@ object Ulx3sSmp {
         val sdramSize = if (sys.env.getOrElse("SDRAM_SIZE", "32") == "64")  64 else 32
     println("SDRAM_SIZE is " + sdramSize)
 
-    val cpuCount = sys.env.get("SAXON_CPU_COUNT").get.toInt
+    val cpuCount = sys.env.getOrElse("SAXON_CPU_COUNT", "1").toInt
     println("CPU_COUNT is " + cpuCount)
 
     val report = SpinalRtlConfig.generateVerilog(InOutWrapper(default(new Ulx3sSmp(cpuCount), sdramSize).toComponent()))
